@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
@@ -13,10 +15,12 @@ public class LevelManager : MonoBehaviour
     public bool autoOpenDoor;
     // Start is called before the first frame update
     private Animator aniDoor;       //開啟門(動畫)
+    private Image imgCross;         
 
     void Start()
     {
         aniDoor = GameObject.Find("門").GetComponent<Animator>();
+        imgCross = GameObject.Find("轉場效果").GetComponent<Image>();
 
         if (autoShowSkill) ShowSkill();
 
@@ -32,6 +36,16 @@ public class LevelManager : MonoBehaviour
     {
         objLight.SetActive(true);
         aniDoor.SetTrigger("開門觸發");
+    }
+
+    public IEnumerator NextLevel()
+    {
+        for(int i=0;i<20 ;i++)
+        {
+            imgCross.color += new Color(0, 0, 0, 0.05f);
+            yield return new WaitForSeconds(0.01f);
+        }
+        SceneManager.LoadScene("關卡2");
     }
     // Update is called once per frame
     void Update()

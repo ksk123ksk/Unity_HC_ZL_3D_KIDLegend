@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     private FixedJoystick joystick;
     private Animator ani;            // 動畫控制器元件
     private Transform target;        // 目標物件
+    private LevelManager levelManager;
 
     private void Start()
     {
@@ -17,12 +18,21 @@ public class Player : MonoBehaviour
         joystick = GameObject.Find("虛擬搖桿").GetComponent<FixedJoystick>();
         //target = GameObject.Find("目標").GetComponent<Transform>();
         target = GameObject.Find("目標").transform;
+        levelManager = FindObjectOfType<LevelManager>();
     }
 
     // 固定更新：一秒執行 50 次 - 處理物理行為
     private void FixedUpdate()
     {
         Move();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.name == "轉場觸發")
+        {
+            StartCoroutine(levelManager.NextLevel());
+        }
     }
 
     /// <summary>
