@@ -16,6 +16,13 @@ public class EnemyData : ScriptableObject
     [Header("停止距離"), Range(1, 100)]
     public float stopDistance;
 
+    [Header("近距離攻擊")]
+    public float attackY;
+    public float attackLength;
+    public float attackDelay;
+
+
+
 
     // Start is called before the first frame update
     void Start()

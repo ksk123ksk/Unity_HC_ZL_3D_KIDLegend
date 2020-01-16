@@ -6,11 +6,13 @@ public class Enemy : MonoBehaviour
 {
     [Header("怪物資料")]
     public EnemyData data;
+
     
 
     private Animator ani;
     private NavMeshAgent nav;
     private Transform Player;
+    private float timer;
 
 
     private void Start()
@@ -33,7 +35,13 @@ public class Enemy : MonoBehaviour
     /// </summary>
     private void Wait()
     {
+        ani.SetBool("跑步開關", false);
+        timer += Time.deltaTime;
 
+        if (timer >= data.cd)
+        {
+            Attack();
+        }
     }
     /// <summary>
     /// 移動
@@ -43,15 +51,27 @@ public class Enemy : MonoBehaviour
         Vector3 posPlayer = Player.position;
         posPlayer.y = transform.position.y;
         transform.LookAt(posPlayer);            //看向玩家
-        ani.SetBool("跑步開關", true);
+        
         nav.SetDestination(Player.position);
+
+        if (nav.remainingDistance < data.stopDistance)
+        {
+            Wait();
+        }
+        else
+        {
+            ani.SetBool("跑步開關", true);
+        }
     }
     /// <summary>
     /// 攻擊
     /// </summary>
-    private void Attack()
+    //protected 保護:允許子類別存取，禁止外部類別存取
+    //virtual 虛擬:允許子類別複寫
+    protected virtual void Attack()
     {
-        
+        ani.SetTrigger("攻擊觸發");
+        timer = 0;
     }
     /// <summary>
     /// 受傷
