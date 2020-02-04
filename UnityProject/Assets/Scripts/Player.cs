@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     private Animator ani;            // 動畫控制器元件
     private Transform target;        // 目標物件
     private LevelManager levelManager;
+    private HpValueManager hpValueManager;
 
     private void Start()
     {
@@ -20,7 +21,8 @@ public class Player : MonoBehaviour
         joystick = GameObject.Find("虛擬搖桿").GetComponent<FixedJoystick>();
         //target = GameObject.Find("目標").GetComponent<Transform>();
         target = GameObject.Find("目標").transform;
-        levelManager = FindObjectOfType<LevelManager>();
+        levelManager = FindObjectOfType<LevelManager>();            //透過類行尋找物件
+        hpValueManager = GetComponentInChildren<HpValueManager>();  //尋找子物件
     }
 
     // 固定更新：一秒執行 50 次 - 處理物理行為
@@ -65,5 +67,11 @@ public class Player : MonoBehaviour
     public void Hit(float damage)
     {
         data.hp -= damage;
+        hpValueManager.SetHp(data.hp, data.Maxhp);//角色受傷血量顯示
+        StartCoroutine(hpValueManager.ShowValue(damage, "-", Color.white));//啟動協程(腳本.協程(傷害,正負號,顏色))
+        /*if (data.hp <= 0)//角色死亡
+        {
+            ani.Set("死亡開關",true);
+        }*/
     }
 }
