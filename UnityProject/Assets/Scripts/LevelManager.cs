@@ -13,6 +13,8 @@ public class LevelManager : MonoBehaviour
     public bool autoShowSkill;      
     [Header("是否自動開門")]
     public bool autoOpenDoor;
+    [Header("復活介面")]
+    public GameObject panelRevival;
     // Start is called before the first frame update
     private Animator aniDoor;       //開啟門(動畫)
     private Image imgCross;         
@@ -46,6 +48,21 @@ public class LevelManager : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
         }
         SceneManager.LoadScene("關卡2");
+    }
+    /// <summary>
+    /// 顯示復活畫面
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerator ShowRevival()
+    {
+        panelRevival.SetActive(true);
+        Text textSecond = panelRevival.transform.GetChild(1).GetComponent<Text>();
+
+        for(int i = 3; i > 0; i--)
+        {
+            textSecond.text = i.ToString();
+            yield return new WaitForSeconds(1);
+        }
     }
     // Update is called once per frame
     void Update()

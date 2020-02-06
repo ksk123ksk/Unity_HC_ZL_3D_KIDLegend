@@ -14,6 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   hp: 100
-  atk: 50
+  atk: 100
   cd: 2
   stopDistance: 50
+  attackY: 2.3
+  attackLength: 0
+  attackDelay: 0
+  attackZ: 1.6
+  bulletPower: 700

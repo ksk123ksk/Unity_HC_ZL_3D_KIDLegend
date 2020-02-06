@@ -66,12 +66,19 @@ public class Player : MonoBehaviour
     /// <param name="damage">接收玩家給予的傷害值</param>
     public void Hit(float damage)
     {
+        if (ani.GetBool("死亡開關")) return;
         data.hp -= damage;
         hpValueManager.SetHp(data.hp, data.Maxhp);//角色受傷血量顯示
         StartCoroutine(hpValueManager.ShowValue(damage, "-", Color.white));//啟動協程(腳本.協程(傷害,正負號,顏色))
-        /*if (data.hp <= 0)//角色死亡
-        {
-            ani.Set("死亡開關",true);
-        }*/
+        if (data.hp <= 0) Dead();//角色死亡
+       
+
+    }
+    private void Dead()
+    {
+        ani.SetBool("死亡開關", true);
+        enabled = false;
+
+        StartCoroutine(levelManager.ShowRevival());
     }
 }
