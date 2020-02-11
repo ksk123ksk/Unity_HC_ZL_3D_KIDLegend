@@ -13,20 +13,25 @@ public class LevelManager : MonoBehaviour
     public bool autoShowSkill;      
     [Header("是否自動開門")]
     public bool autoOpenDoor;
-    [Header("復活介面")]
+    [Header("復活介面,復活按鈕")]
     public GameObject panelRevival;
+    public Button btnRevival;
     // Start is called before the first frame update
     private Animator aniDoor;       //開啟門(動畫)
-    private Image imgCross;         
+    private Image imgCross;
+    private AdManager adManager;    //廣告管理器
 
     void Start()
     {
         aniDoor = GameObject.Find("門").GetComponent<Animator>();
         imgCross = GameObject.Find("轉場效果").GetComponent<Image>();
 
-        if (autoShowSkill) ShowSkill();
+        if (autoShowSkill) ShowSkill();                                 //如果是顯示技能呼叫顯示技能方法
+                
+        if (autoOpenDoor) Invoke("OpenDoor", 6);                        //如果是自動開門延遲呼叫開門方法
 
-        if (autoOpenDoor) Invoke("OpenDoor", 6);
+        adManager = FindObjectOfType<AdManager>();                        //透過類行尋找物件<廣告管理器>
+        btnRevival.onClick.AddListener(adManager.ShowADRevival);        //按鈕.點擊.增加監聽者(廣告管理器.顯示復活廣告)
     }
 
     private void ShowSkill()
@@ -64,9 +69,11 @@ public class LevelManager : MonoBehaviour
             yield return new WaitForSeconds(1);
         }
     }
-    // Update is called once per frame
-    void Update()
+
+    public void HideRevival()
     {
-        
+        StopCoroutine(ShowRevival());
+        panelRevival.SetActive(false);
     }
+    
 }
