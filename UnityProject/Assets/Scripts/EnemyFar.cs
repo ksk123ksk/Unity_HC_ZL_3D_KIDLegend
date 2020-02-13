@@ -24,6 +24,7 @@ public class EnemyFar : Enemy
 
         temp.AddComponent<Bullet>();
         temp.GetComponent<Bullet>().damage = data.atk;
+        temp.GetComponent<Bullet>().player = false;
     }
 
     

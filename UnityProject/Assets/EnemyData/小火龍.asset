@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: "\u5C0F\u706B\u9F8D"
   m_EditorClassIdentifier: 
   speed: 0
-  hp: 100
+  hp: 0
+  Maxhp: 100
   atk: 100
   cd: 2
   stopDistance: 50

@@ -9,6 +9,7 @@ public class EnemyData : ScriptableObject
     public float speed;
     [Header("血量"), Range(100, 5000)]
     public float hp;
+    public float Maxhp;
     [Header("攻擊力"), Range(10, 1000)]
     public float atk;
     [Header("冷卻時間"), Range(1, 10)]
@@ -27,19 +28,4 @@ public class EnemyData : ScriptableObject
     [Header("遠距離子彈速度"), Range(0, 5000)]
     public int bulletPower;
 
-
-
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

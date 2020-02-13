@@ -13,6 +13,7 @@ public class Enemy : MonoBehaviour
     private NavMeshAgent nav;
     private Transform Player;
     private float timer;
+    private HpValueManager hpValueManager;
 
 
     private void Start()
@@ -20,9 +21,10 @@ public class Enemy : MonoBehaviour
         ani = GetComponent<Animator>();
         nav = GetComponent<NavMeshAgent>();
         nav.speed = data.speed;
-        Player = GameObject.Find("鼠王").transform;
         nav.stoppingDistance = data.stopDistance;
 
+        Player = GameObject.Find("鼠王").transform;
+        hpValueManager = GetComponentInChildren<HpValueManager>();  //尋找子物件
     }
     private void Update()
     {
@@ -77,9 +79,13 @@ public class Enemy : MonoBehaviour
     /// 受傷
     /// </summary>
     /// <param name="damage">接收玩家給予的傷害值</param>
-    private void Hit(float damage)
+    public void Hit(float damage)
     {
-
+        if (ani.GetBool("死亡開關")) return;
+        data.hp -= damage;
+        hpValueManager.SetHp(data.hp, data.Maxhp);//角色受傷血量顯示
+        StartCoroutine(hpValueManager.ShowValue(damage, "-", Color.white));//啟動協程(腳本.協程(傷害,正負號,顏色))
+        if (data.hp <= 0) Dead();//角色死亡
     }
     /// <summary>
     /// 死亡
