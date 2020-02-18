@@ -21,6 +21,7 @@ public class LevelManager : MonoBehaviour
     private Image imgCross;
     private AdManager adManager;    //廣告管理器
 
+
     void Start()
     {
         aniDoor = GameObject.Find("門").GetComponent<Animator>();
@@ -76,4 +77,15 @@ public class LevelManager : MonoBehaviour
         panelRevival.SetActive(false);
     }
     
+    public void Pass()
+    {
+        OpenDoor();
+
+        Item[] items = FindObjectsOfType<Item>();
+
+        for(int i = 0; i < items.Length; i++)
+        {
+            items[i].pass = true;
+        }   
+    }
 }

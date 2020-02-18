@@ -22,9 +22,9 @@ public class Bullet : MonoBehaviour
             other.GetComponent<Player>().Hit(damage);     //取得<玩家>().受傷(傷害值)
             Destroy(gameObject);
         }
-        if (player && other.tag == "enemy")                         //如果碰到.名稱="鼠王"
+        if (player && other.tag == "enemy"&& other.GetComponent<Enemy>())                         //如果碰到.名稱="敵人"
         {
-            other.GetComponent<Enemy>().Hit(damage);     //取得<玩家>().受傷(傷害值)
+            other.GetComponent<Enemy>().Hit(damage);     //取得<敵人>().受傷(傷害值)
             Destroy(gameObject);
         }
     }

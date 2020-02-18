@@ -6,9 +6,10 @@ public class Enemy : MonoBehaviour
 {
     [Header("怪物資料")]
     public EnemyData data;
+    public GameObject coin;
 
-    
 
+    private float hp;
     private Animator ani;
     private NavMeshAgent nav;
     private Transform Player;
@@ -25,6 +26,7 @@ public class Enemy : MonoBehaviour
 
         Player = GameObject.Find("鼠王").transform;
         hpValueManager = GetComponentInChildren<HpValueManager>();  //尋找子物件
+        hp = data.hp;
     }
     private void Update()
     {
@@ -50,6 +52,8 @@ public class Enemy : MonoBehaviour
     /// </summary>
     private void Move()
     {
+        if (ani.GetBool("死亡開關")) return;
+
         Vector3 posPlayer = Player.position;
         posPlayer.y = transform.position.y;
         transform.LookAt(posPlayer);            //看向玩家
@@ -82,16 +86,28 @@ public class Enemy : MonoBehaviour
     public void Hit(float damage)
     {
         if (ani.GetBool("死亡開關")) return;
-        data.hp -= damage;
-        hpValueManager.SetHp(data.hp, data.Maxhp);//角色受傷血量顯示
+        hp -= damage;
+        hpValueManager.SetHp(hp, data.Maxhp);//角色受傷血量顯示
         StartCoroutine(hpValueManager.ShowValue(damage, "-", Color.white));//啟動協程(腳本.協程(傷害,正負號,顏色))
-        if (data.hp <= 0) Dead();//角色死亡
+        if (hp <= 0) Dead();//角色死亡
     }
     /// <summary>
     /// 死亡
     /// </summary>
     private void Dead()
     {
+        ani.SetBool("死亡開關",true);
+        nav.isStopped = true;
+        Destroy(this);                      //Destroy(GetComponent<元件>());
+        CreateCoin();
+    }
+    private void CreateCoin()
+    {
+        int r = (int)Random.Range(data.coinRange.x, data.coinRange.y);
 
+        for(int i = 0; i < r; i++)
+        {
+            Instantiate(coin, transform.position + transform.up * 2, transform.rotation);
+        }
     }
 }
