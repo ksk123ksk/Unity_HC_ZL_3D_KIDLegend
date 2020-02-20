@@ -53,7 +53,17 @@ public class LevelManager : MonoBehaviour
             imgCross.color += new Color(0, 0, 0, 0.05f);
             yield return new WaitForSeconds(0.01f);
         }
-        SceneManager.LoadScene("關卡2");
+
+        if (SceneManager.GetActiveScene().name.Contains("Boss"))
+        {
+            SceneManager.LoadScene(0);
+        }
+        else
+        {
+            int index = SceneManager.GetActiveScene().buildIndex;
+            SceneManager.LoadScene(++index);
+        }
+        
     }
     /// <summary>
     /// 顯示復活畫面

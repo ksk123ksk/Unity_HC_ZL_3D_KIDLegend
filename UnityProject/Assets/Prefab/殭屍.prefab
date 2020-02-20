@@ -989,6 +989,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 3c74263431fad6d42a02f0edc4cd29cc, type: 2}
+  coin: {fileID: 0}
 --- !u!1 &4824187919839052926
 GameObject:
   m_ObjectHideFlags: 0
@@ -1105,6 +1106,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4824187919838959644}
     m_Modifications:
+    - target: {fileID: 7929831766846203838, guid: 6a4e598aad9aec14b9126c6410b30e3f,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7929831766846203838, guid: 6a4e598aad9aec14b9126c6410b30e3f,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7929831766846203838, guid: 6a4e598aad9aec14b9126c6410b30e3f,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.17726517
+      objectReference: {fileID: 0}
     - target: {fileID: 7929831767177006676, guid: 6a4e598aad9aec14b9126c6410b30e3f,
         type: 3}
       propertyPath: m_Name

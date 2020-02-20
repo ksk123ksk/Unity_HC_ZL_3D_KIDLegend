@@ -15,7 +15,7 @@ MonoBehaviour:
   speed: 0
   hp: 100
   Maxhp: 100
-  atk: 100
+  atk: 50
   cd: 2
   stopDistance: 50
   attackY: 2.3

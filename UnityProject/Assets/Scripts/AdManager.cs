@@ -13,7 +13,7 @@ public class AdManager : MonoBehaviour, IUnityAdsListener
 
     private void Start()
     {
-        Advertisement.Initialize(googleID, true);   //廣告.初始化(廣告ID,是否開啟測試)
+        Advertisement.Initialize(googleID, false);   //廣告.初始化(廣告ID,是否開啟測試)
         Advertisement.AddListener(this);
         player = FindObjectOfType<Player>();
     }
@@ -58,7 +58,8 @@ public class AdManager : MonoBehaviour, IUnityAdsListener
                     break;
                 case ShowResult.Finished:
                     print("完成");
-                    player.Revival();
+                    GameObject.Find("鼠王").GetComponent<Player>().Revival();
+                    
                     break;
             }
         }

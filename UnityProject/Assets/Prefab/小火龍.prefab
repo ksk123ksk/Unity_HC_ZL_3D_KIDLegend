@@ -1731,6 +1731,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 217f3e05668219b4d9031dabaf8030d9, type: 2}
+  coin: {fileID: 6563950801879891638, guid: ccfbe8d412f4a0244bd46caa6b00061b, type: 3}
   bullet: {fileID: 2729275037197847611, guid: 24eefbc39c5755043b66555ba7f44913, type: 3}
 --- !u!1 &9051292937228587389
 GameObject:
@@ -1805,6 +1806,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5555338088489624166}
     m_Modifications:
+    - target: {fileID: 7929831766846203838, guid: 6a4e598aad9aec14b9126c6410b30e3f,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7929831766846203838, guid: 6a4e598aad9aec14b9126c6410b30e3f,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7929831766846203838, guid: 6a4e598aad9aec14b9126c6410b30e3f,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.17726517
+      objectReference: {fileID: 0}
     - target: {fileID: 7929831767177006676, guid: 6a4e598aad9aec14b9126c6410b30e3f,
         type: 3}
       propertyPath: m_Name
